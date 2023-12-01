@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1</title>
+    <script src="input.js"></script>
+</head>
+<body>
+
+    <style>
+        .passing {
+            background-color: green;
+        }
+        .failing {
+            background-color: red;
+        }
+    </style>
+
+    <pre>Open console to see the answer (F12)</pre>
+
+    <div class="results"></div>
+
+    <script>
+        var main = function (input) {
+
+            const globalResults = [];
+
+            for (const value of input) {
+
+                var result = [];
+
+                for (var i = 0; i < value.length; i++) {
+
+                    const parsedCharacter = parseInt(value[i]);
+                    const isLetter = isNaN(parsedCharacter);
+                    
+                    if(isLetter) {
+                        continue;
+                    }
+                    
+                    result.push(parsedCharacter);
+                }
+
+                if(result.length === 1) {
+                    result = [parseInt(`${result[0]}${result[0]}`)];
+                }
+
+                if(result.length === 2) {
+                    result = [parseInt(`${result[0]}${result[1]}`)];
+                }
+
+                globalResults.push(sumArray(result));
+            }
+
+            return sumArray(globalResults);
+
+        };
+
+        const sumArray = function (array) {
+            let sum = 0;
+
+            for (const number of array) {
+                sum += number;
+            }
+
+            return sum;
+        }
+
+        var assertThan = function (input, actual, expected) {
+
+            const element = document.querySelector('.results');
+            const isPassing = actual === expected;
+
+            element.innerHTML += `<div class="${(isPassing ? 'passing' : 'failing')}">Input: ${input} - Expected: ${expected} - Actual: ${actual}</div>`;
+        };
+
+        assertThan('1abc2', main(['1abc2']), 12);
+        assertThan('pqr3stu8vwx', main(['pqr3stu8vwx']), 38);
+        assertThan('a1b2c3d4e5f', main(['a1b2c3d4e5f']), 15);
+        assertThan('treb7uchet', main(['treb7uchet']), 77);
+        assertThan('all', main(['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7uchet']), 142);
+
+        console.log(main(input)); // 41098 -> too low
+    </script>
+</body>
+</html>
