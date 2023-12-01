@@ -67,7 +67,7 @@
             return sum;
         }
 
-        var assertThan = function (input, actual, expected) {
+        var assertThat = function (input, actual, expected) {
 
             const element = document.querySelector('.results');
             const isPassing = actual === expected;
@@ -75,11 +75,11 @@
             element.innerHTML += `<div class="${(isPassing ? 'passing' : 'failing')}">Input: ${input} - Expected: ${expected} - Actual: ${actual}</div>`;
         };
 
-        assertThan('1abc2', main(['1abc2']), 12);
-        assertThan('pqr3stu8vwx', main(['pqr3stu8vwx']), 38);
-        assertThan('a1b2c3d4e5f', main(['a1b2c3d4e5f']), 15);
-        assertThan('treb7uchet', main(['treb7uchet']), 77);
-        assertThan('all', main(['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7uchet']), 142);
+        assertThat('1abc2', main(['1abc2']), 12);
+        assertThat('pqr3stu8vwx', main(['pqr3stu8vwx']), 38);
+        assertThat('a1b2c3d4e5f', main(['a1b2c3d4e5f']), 15);
+        assertThat('treb7uchet', main(['treb7uchet']), 77);
+        assertThat('all', main(['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7uchet']), 142);
 
         console.log(main(input)); // 41098 -> too low
     </script>
